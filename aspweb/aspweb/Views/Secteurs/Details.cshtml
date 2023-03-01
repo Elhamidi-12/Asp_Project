@@ -1,0 +1,26 @@
+﻿@model aspweb.Models.Secteur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Secteur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomSecteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomSecteur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.codeSecteur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

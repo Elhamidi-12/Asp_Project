@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Projet_Fin_FormationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AffeModule">
+          <Key>
+            <PropertyRef Name="numAff" />
+          </Key>
+          <Property Name="numAff" Type="int" Nullable="false" />
+          <Property Name="numFormateur" Type="int" Nullable="false" />
+          <Property Name="codeM" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Filliere">
+          <Key>
+            <PropertyRef Name="codeFil" />
+          </Key>
+          <Property Name="codeFil" Type="int" Nullable="false" />
+          <Property Name="nomF" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="codeSecteur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formateur">
+          <Key>
+            <PropertyRef Name="numFormateur" />
+          </Key>
+          <Property Name="numFormateur" Type="int" Nullable="false" />
+          <Property Name="nom" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="prenom" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="codeg" />
+          </Key>
+          <Property Name="codeg" Type="int" Nullable="false" />
+          <Property Name="nomG" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="codeFil" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="codeM" />
+          </Key>
+          <Property Name="codeM" Type="int" Nullable="false" />
+          <Property Name="nomM" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MasseH" Type="int" Nullable="false" />
+          <Property Name="codeFil" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="codeSalle" />
+          </Key>
+          <Property Name="codeSalle" Type="int" Nullable="false" />
+          <Property Name="nomSalle" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="typeSalle" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Secteur">
+          <Key>
+            <PropertyRef Name="codeSecteur" />
+          </Key>
+          <Property Name="codeSecteur" Type="int" Nullable="false" />
+          <Property Name="nomSecteur" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AffeModul__codeM__1DE57479">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="AffeModule" Type="Self.AffeModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="codeM" />
+            </Principal>
+            <Dependent Role="AffeModule">
+              <PropertyRef Name="codeM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AffeModul__numFo__1CF15040">
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="1" />
+          <End Role="AffeModule" Type="Self.AffeModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formateur">
+              <PropertyRef Name="numFormateur" />
+            </Principal>
+            <Dependent Role="AffeModule">
+              <PropertyRef Name="numFormateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filliere__codeSe__1273C1CD">
+          <End Role="Secteur" Type="Self.Secteur" Multiplicity="1" />
+          <End Role="Filliere" Type="Self.Filliere" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Secteur">
+              <PropertyRef Name="codeSecteur" />
+            </Principal>
+            <Dependent Role="Filliere">
+              <PropertyRef Name="codeSecteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groupe__codeFil__15502E78">
+          <End Role="Filliere" Type="Self.Filliere" Multiplicity="1" />
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filliere">
+              <PropertyRef Name="codeFil" />
+            </Principal>
+            <Dependent Role="Groupe">
+              <PropertyRef Name="codeFil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Module__codeFil__182C9B23">
+          <End Role="Filliere" Type="Self.Filliere" Multiplicity="1" />
+          <End Role="Module" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filliere">
+              <PropertyRef Name="codeFil" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="codeFil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Projet_Fin_FormationModelStoreContainer">
+          <EntitySet Name="AffeModule" EntityType="Self.AffeModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filliere" EntityType="Self.Filliere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formateur" EntityType="Self.Formateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groupe" EntityType="Self.Groupe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salle" EntityType="Self.salle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Secteur" EntityType="Self.Secteur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AffeModul__codeM__1DE57479" Association="Self.FK__AffeModul__codeM__1DE57479">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="AffeModule" EntitySet="AffeModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AffeModul__numFo__1CF15040" Association="Self.FK__AffeModul__numFo__1CF15040">
+            <End Role="Formateur" EntitySet="Formateur" />
+            <End Role="AffeModule" EntitySet="AffeModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filliere__codeSe__1273C1CD" Association="Self.FK__Filliere__codeSe__1273C1CD">
+            <End Role="Secteur" EntitySet="Secteur" />
+            <End Role="Filliere" EntitySet="Filliere" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groupe__codeFil__15502E78" Association="Self.FK__Groupe__codeFil__15502E78">
+            <End Role="Filliere" EntitySet="Filliere" />
+            <End Role="Groupe" EntitySet="Groupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Module__codeFil__182C9B23" Association="Self.FK__Module__codeFil__182C9B23">
+            <End Role="Filliere" EntitySet="Filliere" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Projet_Fin_FormationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AffeModule">
+          <Key>
+            <PropertyRef Name="numAff" />
+          </Key>
+          <Property Name="numAff" Type="Int32" Nullable="false" />
+          <Property Name="numFormateur" Type="Int32" Nullable="false" />
+          <Property Name="codeM" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Module" Relationship="Self.FK__AffeModul__codeM__1DE57479" FromRole="AffeModule" ToRole="Module" />
+          <NavigationProperty Name="Formateur" Relationship="Self.FK__AffeModul__numFo__1CF15040" FromRole="AffeModule" ToRole="Formateur" />
+        </EntityType>
+        <EntityType Name="Filliere">
+          <Key>
+            <PropertyRef Name="codeFil" />
+          </Key>
+          <Property Name="codeFil" Type="Int32" Nullable="false" />
+          <Property Name="nomF" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codeSecteur" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Secteur" Relationship="Self.FK__Filliere__codeSe__1273C1CD" FromRole="Filliere" ToRole="Secteur" />
+          <NavigationProperty Name="Groupes" Relationship="Self.FK__Groupe__codeFil__15502E78" FromRole="Filliere" ToRole="Groupe" />
+          <NavigationProperty Name="Modules" Relationship="Self.FK__Module__codeFil__182C9B23" FromRole="Filliere" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Formateur">
+          <Key>
+            <PropertyRef Name="numFormateur" />
+          </Key>
+          <Property Name="numFormateur" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AffeModules" Relationship="Self.FK__AffeModul__numFo__1CF15040" FromRole="Formateur" ToRole="AffeModule" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="codeg" />
+          </Key>
+          <Property Name="codeg" Type="Int32" Nullable="false" />
+          <Property Name="nomG" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codeFil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Filliere" Relationship="Self.FK__Groupe__codeFil__15502E78" FromRole="Groupe" ToRole="Filliere" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="codeM" />
+          </Key>
+          <Property Name="codeM" Type="Int32" Nullable="false" />
+          <Property Name="nomM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MasseH" Type="Int32" Nullable="false" />
+          <Property Name="codeFil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AffeModules" Relationship="Self.FK__AffeModul__codeM__1DE57479" FromRole="Module" ToRole="AffeModule" />
+          <NavigationProperty Name="Filliere" Relationship="Self.FK__Module__codeFil__182C9B23" FromRole="Module" ToRole="Filliere" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="codeSalle" />
+          </Key>
+          <Property Name="codeSalle" Type="Int32" Nullable="false" />
+          <Property Name="nomSalle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="typeSalle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Secteur">
+          <Key>
+            <PropertyRef Name="codeSecteur" />
+          </Key>
+          <Property Name="codeSecteur" Type="Int32" Nullable="false" />
+          <Property Name="nomSecteur" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Fillieres" Relationship="Self.FK__Filliere__codeSe__1273C1CD" FromRole="Secteur" ToRole="Filliere" />
+        </EntityType>
+        <Association Name="FK__AffeModul__codeM__1DE57479">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="AffeModule" Type="Self.AffeModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="codeM" />
+            </Principal>
+            <Dependent Role="AffeModule">
+              <PropertyRef Name="codeM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AffeModul__numFo__1CF15040">
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="1" />
+          <End Role="AffeModule" Type="Self.AffeModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formateur">
+              <PropertyRef Name="numFormateur" />
+            </Principal>
+            <Dependent Role="AffeModule">
+              <PropertyRef Name="numFormateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Filliere__codeSe__1273C1CD">
+          <End Role="Secteur" Type="Self.Secteur" Multiplicity="1" />
+          <End Role="Filliere" Type="Self.Filliere" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Secteur">
+              <PropertyRef Name="codeSecteur" />
+            </Principal>
+            <Dependent Role="Filliere">
+              <PropertyRef Name="codeSecteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groupe__codeFil__15502E78">
+          <End Role="Filliere" Type="Self.Filliere" Multiplicity="1" />
+          <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filliere">
+              <PropertyRef Name="codeFil" />
+            </Principal>
+            <Dependent Role="Groupe">
+              <PropertyRef Name="codeFil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Module__codeFil__182C9B23">
+          <End Role="Filliere" Type="Self.Filliere" Multiplicity="1" />
+          <End Role="Module" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filliere">
+              <PropertyRef Name="codeFil" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="codeFil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Projet_Fin_FormationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AffeModules" EntityType="Self.AffeModule" />
+          <EntitySet Name="Fillieres" EntityType="Self.Filliere" />
+          <EntitySet Name="Formateurs" EntityType="Self.Formateur" />
+          <EntitySet Name="Groupes" EntityType="Self.Groupe" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="salles" EntityType="Self.salle" />
+          <EntitySet Name="Secteurs" EntityType="Self.Secteur" />
+          <AssociationSet Name="FK__AffeModul__codeM__1DE57479" Association="Self.FK__AffeModul__codeM__1DE57479">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="AffeModule" EntitySet="AffeModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AffeModul__numFo__1CF15040" Association="Self.FK__AffeModul__numFo__1CF15040">
+            <End Role="Formateur" EntitySet="Formateurs" />
+            <End Role="AffeModule" EntitySet="AffeModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Filliere__codeSe__1273C1CD" Association="Self.FK__Filliere__codeSe__1273C1CD">
+            <End Role="Secteur" EntitySet="Secteurs" />
+            <End Role="Filliere" EntitySet="Fillieres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groupe__codeFil__15502E78" Association="Self.FK__Groupe__codeFil__15502E78">
+            <End Role="Filliere" EntitySet="Fillieres" />
+            <End Role="Groupe" EntitySet="Groupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Module__codeFil__182C9B23" Association="Self.FK__Module__codeFil__182C9B23">
+            <End Role="Filliere" EntitySet="Fillieres" />
+            <End Role="Module" EntitySet="Modules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Projet_Fin_FormationModelStoreContainer" CdmEntityContainer="Projet_Fin_FormationEntities">
+          <EntitySetMapping Name="AffeModules">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.AffeModule">
+              <MappingFragment StoreEntitySet="AffeModule">
+                <ScalarProperty Name="numAff" ColumnName="numAff" />
+                <ScalarProperty Name="numFormateur" ColumnName="numFormateur" />
+                <ScalarProperty Name="codeM" ColumnName="codeM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fillieres">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.Filliere">
+              <MappingFragment StoreEntitySet="Filliere">
+                <ScalarProperty Name="codeFil" ColumnName="codeFil" />
+                <ScalarProperty Name="nomF" ColumnName="nomF" />
+                <ScalarProperty Name="codeSecteur" ColumnName="codeSecteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formateurs">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.Formateur">
+              <MappingFragment StoreEntitySet="Formateur">
+                <ScalarProperty Name="numFormateur" ColumnName="numFormateur" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groupes">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.Groupe">
+              <MappingFragment StoreEntitySet="Groupe">
+                <ScalarProperty Name="codeg" ColumnName="codeg" />
+                <ScalarProperty Name="nomG" ColumnName="nomG" />
+                <ScalarProperty Name="codeFil" ColumnName="codeFil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="codeM" ColumnName="codeM" />
+                <ScalarProperty Name="nomM" ColumnName="nomM" />
+                <ScalarProperty Name="MasseH" ColumnName="MasseH" />
+                <ScalarProperty Name="codeFil" ColumnName="codeFil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salles">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.salle">
+              <MappingFragment StoreEntitySet="salle">
+                <ScalarProperty Name="codeSalle" ColumnName="codeSalle" />
+                <ScalarProperty Name="nomSalle" ColumnName="nomSalle" />
+                <ScalarProperty Name="typeSalle" ColumnName="typeSalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Secteurs">
+            <EntityTypeMapping TypeName="Projet_Fin_FormationModel.Secteur">
+              <MappingFragment StoreEntitySet="Secteur">
+                <ScalarProperty Name="codeSecteur" ColumnName="codeSecteur" />
+                <ScalarProperty Name="nomSecteur" ColumnName="nomSecteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

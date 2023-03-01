@@ -1,0 +1,42 @@
+﻿@model aspweb.Models.Module
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Module</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MasseH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MasseH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Filliere.nomF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Filliere.nomF)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.codeM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

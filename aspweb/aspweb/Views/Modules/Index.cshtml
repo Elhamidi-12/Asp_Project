@@ -1,0 +1,45 @@
+﻿@model IEnumerable<aspweb.Models.Module>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nomM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MasseH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Filliere.nomF)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MasseH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Filliere.nomF)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.codeM }) |
+            @Html.ActionLink("Details", "Details", new { id=item.codeM }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.codeM })
+        </td>
+    </tr>
+}
+
+</table>
